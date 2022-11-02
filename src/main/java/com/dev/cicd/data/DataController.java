@@ -2,13 +2,8 @@ package com.dev.cicd.data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class DataController {
