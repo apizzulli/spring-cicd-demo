@@ -11,54 +11,56 @@ jobs:
   docker: 
     runs-on: ubuntu-latest
     steps: 
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - 
-        name: Set Up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Login to Docker Hub
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
         uses: docker/login-action@v2
-        with: 
-          username: apizzulli
-          password: dckr_pat_qHnvyOIG7jcReAZIBRRxEzFokHk
-      -
-        name: Build and push
-        uses: docker/build-push-action@v3
         with:
+          username: apizzulli
+          password: dckr_pat_82tPTNM101mSleh-2f7Ig_Bhv3M
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      -name: Build and push
+        uses: docker/build-push-action@v3
+        with: 
+          context: .
+          file: ./Dockerfile
           push: true
-          tags: user/app:latest
-      - 
-        name: Springboot Pipeline
+          tags: apizzulli/spring-docker:latest
+
+      - name: Springboot Pipeline
         uses: actions/checkout@v1
+
       #Set up JDK 11
-      - 
-        name: Set up JDK
+      - name: Set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: '11'
+
       #Run Tests
-      - 
-        name: Run Tests
+      - name: Run Tests
         run: mvn -B test
-      - 
-        name: Cache SonarCloud packages
+
+      - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+
       #Set up Maven cache
-      - 
-        name: Cache Maven packages
+      - name: Cache Maven packages
         uses: actions/cache@v1
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - 
-        name: Build and analyze
+
+      - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
