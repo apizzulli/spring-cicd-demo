@@ -29,9 +29,8 @@ jobs:
         with:
           push: true
           tags: user/app:latest
-
-
-      - name: Springboot Pipeline
+      - 
+        name: Springboot Pipeline
         uses: actions/checkout@v1
       #Set up JDK 11
       - 
