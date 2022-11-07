@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v3
         with: 
           context: .
-          file: ./Dockerfile
+          file: ../Dockerfile
           push: true
           tags: apizzulli/spring-docker:latest
       - name: Springboot Pipeline
