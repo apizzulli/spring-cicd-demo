@@ -28,7 +28,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: apizzulli/spring-docker:latest
+          tags: apizzulli/spring-docker:latestx2
       - name: Springboot Pipeline
         uses: actions/checkout@v1
       #Set up JDK 11
