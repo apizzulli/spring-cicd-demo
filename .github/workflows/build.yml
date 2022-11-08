@@ -23,8 +23,10 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with: 
+          run: cd ../
+               cd ../
           context: ./
-          file: .../Dockerfile
+          file: ./Dockerfile
           push: true
           tags: apizzulli/spring-docker:latest
       - name: Springboot Pipeline
