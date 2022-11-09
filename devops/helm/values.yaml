@@ -1,0 +1,5 @@
+deployment:
+  image: "apizzulli/spring-docker"
+  tag: "latest"
+name: demo-app
+replicas: "3"
