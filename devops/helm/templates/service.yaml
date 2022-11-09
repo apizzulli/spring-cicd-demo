@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.name }}"
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: "{{ .Values.name }}"
+spec:
+  type: NodePort
+  selector:
+    app: "{{ .Values.name }}"
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8080
+      targetPort: 8080
