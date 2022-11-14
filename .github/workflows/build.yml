@@ -32,7 +32,8 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
 
-      - name: Build_and_push
+      - name: Build and push
+        id: Build_and_push
         uses: docker/build-push-action@v3
         with: 
           run: cd ../
