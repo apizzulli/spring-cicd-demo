@@ -52,7 +52,7 @@ jobs:
           valueFile: 'devops/helm/values.yaml'
           propertyPath: 'deployment.tag'
           value: ${{ steps.Build_and_push.outputs.digest }}
-          branch: deployment/${{ steps.Build_and_push.outputs.imageid }}
+          branch: deployment/demo-app
           targetBranch: master
           createPR: true
           message: 'Update Image Version to ${{ steps.Build_and_push.outputs.digest }}' 
