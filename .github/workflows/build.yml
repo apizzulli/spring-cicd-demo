@@ -37,7 +37,8 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.docker_tags.outputs.tags }}
+          tags: ${{ github.event.workflow_run.head_commit.id }}
+
 #commnet
       - name: Update Image Version in the related HelmChart values.yaml
         uses: fjogeleit/yaml-update-action@main
@@ -47,7 +48,7 @@ jobs:
                echo hello ${{ steps.Build_and_push.outputs.digest }}
           valueFile: 'devops/helm/values.yaml'
           propertyPath: 'deployment.tag'
-          value: ${{ steps.Build_and_push.outputs.digest }}
+          value: ${{ github.event.workflow_run.head_commit.id }}
           branch: deployment/demo-app
           targetBranch: master
           createPR: true
