@@ -32,7 +32,7 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
 
-      - name: Build and push
+      - name: Build_and_push
         uses: docker/build-push-action@v3
         with: 
           run: cd ../
@@ -41,6 +41,17 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+
+      - name: Update Image Version in the related HelmChart values.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: 'devops/helm/values.yaml'
+          propertyPath: 'deployment.tag'
+          value: ${{ steps.Build_and_push.outputs.digest }}
+          branch: deployment/${{ steps.Build_and_push.outputs.digest }}
+          targetBranch: master
+          createPR: true
+          message: 'Update Image Version to ${{ steps.Build_and_push.outputs.digest }}' 
 
       - name: Springboot Pipeline
         uses: actions/checkout@v1
