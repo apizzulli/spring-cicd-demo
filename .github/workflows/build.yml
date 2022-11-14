@@ -45,7 +45,9 @@ jobs:
       - name: Update Image Version in the related HelmChart values.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
-          run: echo ${{ steps.Build_and_push.outputs.digest }}
+          run: cd ../
+               cd ../
+               echo hello ${{ steps.Build_and_push.outputs.digest }}
           valueFile: 'devops/helm/values.yaml'
           propertyPath: 'deployment.tag'
           value: ${{ steps.Build_and_push.outputs.digest }}
