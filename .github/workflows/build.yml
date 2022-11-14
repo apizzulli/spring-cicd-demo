@@ -38,7 +38,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ steps.docker_tags.outputs.tags }}
-
+#commnet
       - name: Update Image Version in the related HelmChart values.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
