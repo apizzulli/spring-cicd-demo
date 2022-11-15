@@ -29,7 +29,8 @@ jobs:
 
       - name: Confirm git commit SHA output
         run: echo ${{ steps.vars.outputs.short_sha }}
-
+             echo ${{ github.ref }}
+      
       - name: Build and push
         id: Build_and_push
         uses: docker/build-push-action@v3
