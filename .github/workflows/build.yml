@@ -40,7 +40,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.vars.outputs.short_sha }}
+          tags: ${{ github.ref_name }}
           #labels: ${{ steps.meta.outputs.labels }}
 
       - name: Springboot Pipeline
