@@ -43,8 +43,8 @@ jobs:
         with: 
           run: cd ../
                cd ../
-               echo ${{ steps.meta.outputs.tags }}
-               echo ${{steps.meta.outputs.tags}}
+               ${{ steps.meta.outputs.tags }}
+               ${{steps.meta.outputs.tags}}
           context: ./
           file: ./Dockerfile
           push: true
