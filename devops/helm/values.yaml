@@ -1,5 +1,5 @@
 deployment:
   image: apizzulli/spring-docker
-  tag: sha256:1b0341fc5be0c05d6fe2ad9667585681558e38adfb392256824130c8a095161b
+  tag: ''
 name: demo-app
 replicas: '3'
