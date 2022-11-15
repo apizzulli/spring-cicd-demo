@@ -1,5 +1,5 @@
 deployment:
   image: apizzulli/spring-docker
-  tag: master-15e6b7e
+  tag: master-f0913f5
 name: demo-app
 replicas: '3'
