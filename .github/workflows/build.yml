@@ -43,16 +43,12 @@ jobs:
         with: 
           run: cd ../
                cd ../
-               ${{ steps.meta.outputs.tags }}
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{steps.meta.outputs.tags}}
+          tags: apizzulli/spring-docker:latest
           #labels: ${{ steps.meta.outputs.labels }}
-#hi
-#commnet
-     
-#hello
+
       - name: Springboot Pipeline
         uses: actions/checkout@v1
       #Set up JDK 11
