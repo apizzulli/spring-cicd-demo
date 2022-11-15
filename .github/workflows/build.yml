@@ -49,7 +49,7 @@ jobs:
           push: true
           tags: ${{steps.meta.outputs.tags}}
           #labels: ${{ steps.meta.outputs.labels }}
-
+#hi
 #commnet
       - name: Update Image Version in the related HelmChart values.yaml
         uses: fjogeleit/yaml-update-action@main
