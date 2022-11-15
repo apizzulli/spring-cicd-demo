@@ -21,6 +21,15 @@ jobs:
           username: apizzulli
           password: dckr_pat_82tPTNM101mSleh-2f7Ig_Bhv3M
 
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "::set-output name=short_sha::$calculatedSha"
+
+      - name: Confirm git commit SHA output
+        run: echo ${{ steps.vars.outputs.short_sha }}
+
       - name: Build and push
         id: Build_and_push
         uses: docker/build-push-action@v3
