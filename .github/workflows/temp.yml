@@ -1,27 +1,26 @@
 - name: Generate Docker metadata
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: |
-            apizzulli/spring-docker
-          tags: |
-            type=ref,event=branch
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-          flavor: |
-            latest=true
+  id: meta
+  uses: docker/metadata-action@v3
+  with:
+    images: |
+      apizzulli/spring-docker
+    tags: |
+      type=ref,event=branch
+      type=semver,pattern={{version}}
+      type=semver,pattern={{major}}.{{minor}}
+    flavor: |
+      latest=true
 
-
-             - name: Update Image Version in the related HelmChart values.yaml
-        uses: fjogeleit/yaml-update-action@main
-        with:
-          run: cd ../
-               cd ../
-               echo hello ${{ steps.Build_and_push.outputs.digest }}
-          valueFile: 'devops/helm/values.yaml'
-          propertyPath: 'deployment.tag'
-          value: ${{ github.event.workflow_run.head_commit.id }}
-          branch: deployment/demo-app
-          targetBranch: master
-          createPR: true
-          message: 'Update Image Version to ${{ steps.Build_and_push.outputs.digest }}' 
+- name: Update Image Version in the related HelmChart values.yaml
+  uses: fjogeleit/yaml-update-action@main
+  with:
+    run: cd ../
+          cd ../
+          echo hello ${{ steps.Build_and_push.outputs.digest }}
+    valueFile: 'devops/helm/values.yaml'
+    propertyPath: 'deployment.tag'
+    value: ${{ github.event.workflow_run.head_commit.id }}
+    branch: deployment/demo-app
+    targetBranch: master
+    createPR: true
+    message: 'Update Image Version to ${{ steps.Build_and_push.outputs.digest }}' 
