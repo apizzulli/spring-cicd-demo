@@ -36,7 +36,8 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.metadata.outputs.labels }}
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
 #commnet
       - name: Update Image Version in the related HelmChart values.yaml
