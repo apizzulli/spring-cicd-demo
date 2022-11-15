@@ -15,13 +15,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+#/////////////////////////////////////////////////////////
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            apizzulli/spring-docker
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+          flavor: |
+            latest=true
+
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: apizzulli
           password: dckr_pat_82tPTNM101mSleh-2f7Ig_Bhv3M
+#///////////////////////////////////////////////////////////
 
-      
 #testing
       - name: Build and push
         id: Build_and_push
@@ -30,7 +44,7 @@ jobs:
           run: cd ../
                cd ../
                echo tags in build push are  ${{ steps.meta.outputs.tags }}
-               echo labels in build push are ${steps.meta.outputs.tags}
+               echo labels in build push are ${{steps.meta.outputs.tags}}
           context: ./
           file: ./Dockerfile
           push: true
