@@ -35,13 +35,24 @@ jobs:
         id: Build_and_push
         uses: docker/build-push-action@v3
         with: 
-          run: cd ../
-               cd ../
+          run: cd ../../
           context: ./
           file: ./Dockerfile
           push: true
           tags: apizzulli/spring-docker:${{ github.ref_name }}-${{ steps.vars.outputs.short_sha }}
           #labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Update Image Version in the related HelmChart values.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          run: cd ../../ 
+          valueFile: 'devops/helm/values.yaml'
+          propertyPath: 'deployment.tag'
+          value: ${{ github.ref_name }}-${{ steps.vars.outputs.short_sha }}
+          branch: deployment/${{ github.ref_name }}-${{ steps.vars.outputs.short_sha }}
+          targetBranch: dev
+          createPR: true
+          message: 'Update Image Version to ${{ github.ref_name }}-${{ steps.vars.outputs.short_sha }}'
 
       - name: Springboot Pipeline
         uses: actions/checkout@v1
