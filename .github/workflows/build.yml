@@ -21,20 +21,6 @@ jobs:
           username: apizzulli
           password: dckr_pat_82tPTNM101mSleh-2f7Ig_Bhv3M
 
-      - name: Get Branch
-        id: branch
-        run: echo "git_branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_BRANCH
-
-      - name: Check Branch
-        run: echo "${{ env.branch }}"
-
-      - name: Get Hash
-        id: hash
-        run: echo "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
-
-      - name: Check Hash
-        run: echo "${{ env.hash }}"
-
       - name: Build and push
         id: Build_and_push
         uses: docker/build-push-action@v3
@@ -44,7 +30,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ env.branch }}-${{ env.hash }}
+          tags: ${{ github.event.pull_request.head.sha }}
           #labels: ${{ steps.meta.outputs.labels }}
 
       - name: Springboot Pipeline
