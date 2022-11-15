@@ -40,6 +40,8 @@ jobs:
         with: 
           run: cd ../
                cd ../
+               echo tags in build push are  ${{ steps.meta.outputs.tags }}
+               echo labels in build push are ${steps.meta.outputs.tags}
           context: ./
           file: ./Dockerfile
           push: true
