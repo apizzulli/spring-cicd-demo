@@ -21,12 +21,11 @@ jobs:
           username: apizzulli
           password: dckr_pat_82tPTNM101mSleh-2f7Ig_Bhv3M
 
-      - name: Generate tags
-        id: docker_tags
-        uses: dnaka91/action-docker-tags@v0.1
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
         with:
-          registries: |
-            docker.io
+          images: apizzulli/spring-docker
 #testing
       - name: Build and push
         id: Build_and_push
@@ -37,7 +36,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ github.event.workflow_run.head_commit.id }}
+          tags: ${{ steps.metadata.outputs.labels }}
 
 #commnet
       - name: Update Image Version in the related HelmChart values.yaml
