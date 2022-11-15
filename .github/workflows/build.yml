@@ -50,7 +50,7 @@ jobs:
           propertyPath: 'deployment.tag'
           value: ${{ github.ref_name }}-${{ steps.vars.outputs.short_sha }}
           branch: deployment/${{ github.ref_name }}-${{ steps.vars.outputs.short_sha }}
-          targetBranch: dev
+          targetBranch: master
           createPR: true
           message: 'Update Image Version to ${{ github.ref_name }}-${{ steps.vars.outputs.short_sha }}'
 
