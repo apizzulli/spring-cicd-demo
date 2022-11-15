@@ -22,10 +22,10 @@ jobs:
         with:
           images: |
             apizzulli/spring-docker
-          tags: |
-            type=ref,event=branch
-     #       type=semver,pattern={{version}}
-           # type=semver,pattern={{major}}.{{minor}}
+          tags: #
+            # type=ref,event=branch
+            # type=semver,pattern={{version}}
+            # type=semver,pattern={{major}}.{{minor}}
           flavor: |
             latest=true
 
